@@ -16,18 +16,16 @@ public class Cards {
 	
 	/**
 	 * Cards constructor
-	 * @param sType
-	 * @param sNum
 	 */
-	public Cards(Suits stype, int snum){
+	public Cards(Suits sType, int sNum){
 		 
-		this.cardSuit = stype;
+		this.cardSuit = sType;
 		
-		if(snum >=1 && snum <= 13)
-			this.cardNum  = snum;
+		if(sNum >=1 && sNum <= 13)
+			this.cardNum  = sNum;
 		else{
 			
-			System.err.println(snum+" is not a valid card number\n");
+			System.err.println(sNum+" is not a valid card number\n");
 			System.exit(1);
 		}
 	}

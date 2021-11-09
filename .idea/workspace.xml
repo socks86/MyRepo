@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8970cc44-b81d-4b1a-9090-a6d3b6760c08" name="Changes" comment="Initial commit. Added JUnit and TestNG libraries and setup the project. Using IntelliJ IDE. Corrected Cards.java having wrong param names for variables used in function.">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/SoftwareTestingFinalProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/aopalliance-1.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/aopalliance-1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/apiguardian-api-1.1.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/apiguardian-api-1.1.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/apiguardian-api-1.1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/guava-19.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/guava-19.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/guava-19.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/guice-4.1.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/guice-4.1.0-no_aop.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/guice-4.1.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javax.inject-1-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javax.inject-1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javax.inject-1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jcommander-1.72-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jcommander-1.72-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jcommander-1.72.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-5.7.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-5.7.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-5.7.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-api-5.7.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-api-5.7.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-api-5.7.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-engine-5.7.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-engine-5.7.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-engine-5.7.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-params-5.7.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-params-5.7.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-jupiter-params-5.7.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-platform-commons-1.7.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-platform-commons-1.7.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-platform-commons-1.7.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-platform-engine-1.7.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-platform-engine-1.7.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/junit-platform-engine-1.7.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/opentest4j-1.2.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/opentest4j-1.2.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/opentest4j-1.2.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/snakeyaml-1.21-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/snakeyaml-1.21-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/snakeyaml-1.21.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/testng-7.1.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/testng-7.1.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/testng-7.1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Blackjack-game-in-java-master/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Blackjack-game-in-java-master/src/blackjackgame/Cards.java" beforeDir="false" afterPath="$PROJECT_DIR$/Blackjack-game-in-java-master/src/blackjackgame/Cards.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="20hOkz81ZxP7PPDBnmWKKcoriI3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8970cc44-b81d-4b1a-9090-a6d3b6760c08" name="Changes" comment="" />
+      <created>1636493512228</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1636493512228</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit. Added JUnit and TestNG libraries and setup the project. Using IntelliJ IDE. Corrected Cards.java having wrong param names for variables used in function." />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit. Added JUnit and TestNG libraries and setup the project. Using IntelliJ IDE. Corrected Cards.java having wrong param names for variables used in function." />
+  </component>
+</project>
