@@ -28,15 +28,13 @@ Test Cases:
 5. Queen, King, Jack counted as 10.
 6. Ace is counted as 11 or 1.
 7. if 2 Ace, one should count as 1.
-8. Whenever total of a hand goes above 21 for a player, Ace is counted as one.
-9. Dealer's turn comes, after Player finishes.
-10. Check Player's and Dealer's BlackJack (initial hand total == 21).
-11. Check Bust condition (total of hand > 21).
-12. Dealer hits until < 17, stays >= 17.
-13. Decide winner-- comapring totals of both the players if total of both is less than equal to 21.
-14. if one player busts, other automatically wins.
-15. if total of both players is equal, its a push (even if, initial hands of both totals to 21).
-16. In case of Double Down choosen by The Player, draw only one card.
+8. Whenever total of a hand goes above 21 for a player, Ace is counted as one. 
+9. Check Bust condition (total of hand > 21).
+10. Dealer hits until < 17, stays >= 17.
+11. Decide winner-- comapring totals of both the players if total of both is less than equal to 21.
+12. if one player busts, other automatically wins.
+13. if total of both players is equal, its a push (even if, initial hands of both totals to 21).
+14. In case of Double Down choosen by The Player, draw only one card.
 
 
 Note:

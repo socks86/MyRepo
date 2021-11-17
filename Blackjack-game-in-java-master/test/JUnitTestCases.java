@@ -5,6 +5,7 @@ import blackjackgame.Suits;
 import org.junit.jupiter.api.*;
 import org.testng.Assert;
 
+import javax.smartcardio.Card;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -176,6 +177,84 @@ public class JUnitTestCases {
 
         player.addCardToPlayersHand(new Cards(Suits.Clubs, 1));
         Assert.assertEquals(player.getPlayersHandTotal(), 12);
+    }
+
+    @Test //Test case 8
+    public void Over21CountsAceAs1(){
+        Players player = new Players("Test");
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 1));//ace of clubs
+        player.getPlayersHandTotal();
+        Assert.assertEquals(player.getPlayersHandTotal(), 11);
+
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        Assert.assertEquals(player.getPlayersHandTotal(), 21);
+
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        Assert.assertEquals(player.getPlayersHandTotal(), 21);
+    }
+
+    @Test //Test case 9
+    public void CheckBustConditions(){
+        GameMain gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+        gameMain.setBalance(100);
+
+        gameMain.hit();
+        gameMain.hit();
+        gameMain.hit();
+        gameMain.hit();
+        gameMain.hit();
+
+        String expected = "# YOU BUSTED #";
+        String[] lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));
+    }
+
+    @Test //Test case 10
+    public void CheckDealerStay17HitsElse(){
+        GameMain gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 7));
+        gameMain.dealersPlay();
+
+        String expected = "Dealer Stays ";
+        String[] lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));
+
+        outContent.reset();
+
+        gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+
+        gameMain.dealersPlay();
+        expected = "Dealer Hits ";
+        lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));
+    }
+
+    @Test //Test case 11
+    public void DecideCorrectWinnerAndPush(){
+
     }
 
     /*

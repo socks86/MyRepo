@@ -54,6 +54,8 @@ public class GameMain {
 	public void setYou(Players you) {
 		this.you = you;
 	}
+
+	public Players getDealer() { return dealer;}
 	
 	GameMain(String pName){
 		
