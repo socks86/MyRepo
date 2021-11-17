@@ -1,4 +1,7 @@
+import blackjackgame.Cards;
 import blackjackgame.GameMain;
+import blackjackgame.Players;
+import blackjackgame.Suits;
 import org.junit.jupiter.api.*;
 import org.testng.Assert;
 
@@ -135,7 +138,45 @@ public class JUnitTestCases {
         Assert.assertEquals(actual, expected);
     }
 
+    @Test //Test case 5
+    public void FaceCardsAreCountedAs10(){
+        Players player = new Players("Test");
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 11));//jack of clubs
+        Assert.assertEquals(player.getPlayersHandTotal(), 10);
 
+        player.emptyHand();
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 12));//queen of clubs
+        Assert.assertEquals(player.getPlayersHandTotal(), 10);
+
+        player.emptyHand();
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 13));//king of clubs
+        Assert.assertEquals(player.getPlayersHandTotal(), 10);
+    }
+
+    @Test //Test case 6
+    public void AceIsCountedAsElevenOrOne(){
+        Players player = new Players("Test");
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 1));//ace of clubs
+        player.getPlayersHandTotal();
+        Assert.assertEquals(player.getPlayersHandTotal(), 11);
+
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        Assert.assertEquals(player.getPlayersHandTotal(), 21);
+
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 5));
+        Assert.assertEquals(player.getPlayersHandTotal(), 16);
+    }
+
+    @Test //Test case 7
+    public void TwoAcesOnlyOneIsEleven(){
+        Players player = new Players("Test");
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 1));//ace of clubs
+        player.getPlayersHandTotal();
+        Assert.assertEquals(player.getPlayersHandTotal(), 11);
+
+        player.addCardToPlayersHand(new Cards(Suits.Clubs, 1));
+        Assert.assertEquals(player.getPlayersHandTotal(), 12);
+    }
 
     /*
     public static void main(String[] args) {
