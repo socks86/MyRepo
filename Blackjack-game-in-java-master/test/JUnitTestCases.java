@@ -6,7 +6,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class JUnitTestCases {
     private static final PrintStream DEFAULT_STDOUT = System.out;
@@ -29,39 +31,118 @@ public class JUnitTestCases {
         System.setIn(DEFAULT_STDIN);
     }
 
-    @Test
+    @Test //Test case 1
     public void BetAmountNotGreaterThanBalance(){
         String userInput = "Test\nD\n101\nE\nN";//"Dan%sVega%sdanvega@gmail.com"
         ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 
         System.setIn(bais);
 
-        String expected = "\nYour bet amount is wrong, it should be a natural number and should not exceed your balance";
+        String expected = "Your bet amount is wrong, it should be a natural number and should not exceed your balance";
 
         GameMain.main(new String[0]);// start the game
 
         String[] lines = outContent.toString().split(System.lineSeparator());
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
         String actual = lines[12];
 
         //checkout output
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(actual, expected);
     }
 
-    @Test
+    @Test //Test case 2
     public void BetAmountIsNaturalNumber(){
         String userInput = "Test\nD\na\n101\nE\nN";//"Dan%sVega%sdanvega@gmail.com"
         ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 
         System.setIn(bais);
 
-        String expected = "\nEnter your bet in Integers (natural numbers) please:";
+        String expected = "Enter your bet in Integers (natural numbers) please:";
 
         GameMain.main(new String[0]);// start the game
 
         String[] lines = outContent.toString().split(System.lineSeparator());
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
         String actual = lines[12];
 
         //checkout output
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(actual, expected);
     }
+
+    @Test //Test case 3
+    public void BalanceIsZeroGameEnd(){
+        GameMain gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+        gameMain.setBalance(0);
+        Assert.assertTrue(gameMain.gameLoop(false));
+    }
+
+    @Test //Test case 4
+    public void CheckForDoubleDownOption(){
+        String userInput = "50\nDD";
+        ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(bais);
+
+        GameMain gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+        gameMain.setBalance(100);
+
+        gameMain.dealTheGame();
+
+        String expected = "Hit or Stay or Double Down? [Enter H or S or DD]";
+        String[] lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        String actual = lines[10];
+        Assert.assertEquals(actual, expected);
+
+
+        userInput = "100\nDD";
+        bais = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(bais);
+
+        gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+        gameMain.setBalance(100);
+
+        outContent.reset();
+
+        gameMain.dealTheGame();
+
+        expected = "Hit or Stay? [Enter H or S(or press any letter to Stay)]";
+        lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        actual = lines[10];
+        Assert.assertEquals(actual, expected);
+    }
+
+
+
+    /*
+    public static void main(String[] args) {
+        GameMain gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+        gameMain.setBalance(100);
+
+        gameMain.dealTheGame();
+    }*/
 }

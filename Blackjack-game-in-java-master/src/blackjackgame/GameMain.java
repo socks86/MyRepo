@@ -20,9 +20,40 @@ public class GameMain {
 	private boolean dealerDone;
 	private Players dealer;
 	private Players you;
-	private static Scanner sc;
+	private static Scanner sc;// = new Scanner(System.in);
 	private boolean doubleDownAllowed;
-	
+
+	public GameMain(){
+		sc = new Scanner(System.in);
+		this.newDeck = new Deck(4, true);
+		boolean gameOver = false;
+		dealer = new Players("Dealer");
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+		setYou(new Players(this.playerName));
+	}
+
+	public float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(float balance) {
+		this.balance = balance;
+	}
+
+	public Players getYou() {
+		return you;
+	}
+
+	public void setYou(Players you) {
+		this.you = you;
+	}
 	
 	GameMain(String pName){
 		
@@ -37,24 +68,9 @@ public class GameMain {
 		// Players init
 		you = new Players(this.playerName);
 		dealer = new Players("Dealer");
-		
-		
-		// Game Starts here --->
-		while(this.balance > 0 &&  !gameOver){
-					
-			System.out.println("\n"+this.playerName+", Do you want to DEAL or END the game [D or E]??");
-			String gameInit = sc.next();
-					
-			if(gameInit.compareToIgnoreCase("D") == 0){
-					
-				this.dealTheGame();			
-			}
-			else{
-						
-				gameOver = true;
-			}	
-		}
-		
+
+		gameLoop(gameOver);
+
 		System.out.println("\n"+this.playerName+", !!!! Game Ended !!!");
 		
 		// To play again
@@ -69,9 +85,28 @@ public class GameMain {
 		sc.close();
 		
 	}
-	
+
+	public boolean gameLoop(boolean gameOver) {
+		// Game Starts here --->
+		while(this.balance > 0 &&  !gameOver){
+
+			System.out.println("\n"+this.playerName+", Do you want to DEAL or END the game [D or E]??");
+			String gameInit = sc.next();
+
+			if(gameInit.compareToIgnoreCase("D") == 0){
+
+				this.dealTheGame();
+			}
+			else{
+
+				gameOver = true;
+			}
+		}
+		return true;
+	}
+
 	// Deal the game
-	private void dealTheGame(){
+	public void dealTheGame(){
 		
 		boolean blackjack = false;
 		this.bet = 0 ;
@@ -157,7 +192,7 @@ public class GameMain {
 	}
 	
 	// Natural 21 check on initial cards
-	private boolean checkIfBlackJack(){
+	public boolean checkIfBlackJack(){
 		
 		boolean blackJack = false;
 		
@@ -214,7 +249,7 @@ public class GameMain {
 	}
 	
 	// Player's Play Turn
-	private void yourPlay(){
+	public void yourPlay(){
 		
 		String answer;
 		/*
@@ -256,7 +291,7 @@ public class GameMain {
 	}
 	
 	// Player's Hit
-	private void hit(){
+	public void hit(){
 		
 		System.out.println("\tYou Choose to Hit.\n");
 		youDone = !you.addCardToPlayersHand(newDeck.dealingNextCard());
@@ -281,14 +316,14 @@ public class GameMain {
 	}
 	
 	// Player's Stay
-	private void stay(){
+	public void stay(){
 		
 		System.out.println("\tYou Choose to Stay, Dealer's turn \n");
 		youDone = true;
 	}
 	
 	// Player's Double Down
-	private void doubleDown(){
+	public void doubleDown(){
 		
 		System.out.println("\tYou Choose to Double Down.\n");
 		
@@ -319,7 +354,7 @@ public class GameMain {
 	}
 	
 	// Dealer's Play Turn
-	private void dealersPlay(){
+	public void dealersPlay(){
 		
 		if(dealer.getPlayersHandTotal() < 17){
 			
@@ -350,7 +385,7 @@ public class GameMain {
 	}
 	
 	// Deciding a Winner
-	private void decideWinner(){
+	public void decideWinner(){
 		
 		int youSum = you.getPlayersHandTotal();
 		int dealerSum = dealer.getPlayersHandTotal();
