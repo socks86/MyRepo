@@ -20,7 +20,7 @@ public class GameMain {
 	private boolean dealerDone;
 	private Players dealer;
 	private Players you;
-	private static Scanner sc = new Scanner(System.in);
+	private static Scanner sc;
 	private boolean doubleDownAllowed;
 	
 	
@@ -395,7 +395,7 @@ public class GameMain {
 
 	public static void main(String[] args) {
 		
-		//Scanner scanner = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		String playerName;
 		
 		System.out.println("\n\t\t\t\t#######################################");
