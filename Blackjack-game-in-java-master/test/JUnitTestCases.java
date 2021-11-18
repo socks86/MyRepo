@@ -5,14 +5,15 @@ import blackjackgame.Suits;
 import org.junit.jupiter.api.*;
 import org.testng.Assert;
 
-import javax.smartcardio.Card;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
+/*
+Author: Justin Lesh
+ */
 
 public class JUnitTestCases {
     private static final PrintStream DEFAULT_STDOUT = System.out;
@@ -53,10 +54,9 @@ public class JUnitTestCases {
                 .map(c -> c.replaceAll("\r",""))
                 .map(c -> c.replaceAll("\n",""))
                 .toArray(String[]::new);
-        String actual = lines[12];
 
         //checkout output
-        Assert.assertEquals(actual, expected);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));
     }
 
     @Test //Test case 2
@@ -77,10 +77,9 @@ public class JUnitTestCases {
                 .map(c -> c.replaceAll("\r",""))
                 .map(c -> c.replaceAll("\n",""))
                 .toArray(String[]::new);
-        String actual = lines[12];
 
         //checkout output
-        Assert.assertEquals(actual, expected);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));
     }
 
     @Test //Test case 3
@@ -111,8 +110,7 @@ public class JUnitTestCases {
                 .map(c -> c.replaceAll("\r",""))
                 .map(c -> c.replaceAll("\n",""))
                 .toArray(String[]::new);
-        String actual = lines[10];
-        Assert.assertEquals(actual, expected);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));
 
 
         userInput = "100\nDD";
@@ -135,8 +133,7 @@ public class JUnitTestCases {
                 .map(c -> c.replaceAll("\r",""))
                 .map(c -> c.replaceAll("\n",""))
                 .toArray(String[]::new);
-        actual = lines[10];
-        Assert.assertEquals(actual, expected);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));
     }
 
     @Test //Test case 5
@@ -253,16 +250,146 @@ public class JUnitTestCases {
     }
 
     @Test //Test case 11
-    public void DecideCorrectWinnerAndPush(){
-
-    }
-
-    /*
-    public static void main(String[] args) {
+    public void DecideCorrectWinner(){
         GameMain gameMain = new GameMain();
         gameMain.setPlayerName("Test");
         gameMain.setBalance(100);
+        gameMain.setBet(1);
 
-        gameMain.dealTheGame();
-    }*/
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 7));
+
+        gameMain.decideWinner();
+
+        String expected = "# YOU WON  #";
+        String[] lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));//20 vs 17
+
+        outContent.reset();
+
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 4));
+
+        gameMain.decideWinner();
+
+        expected = "# YOU LOST #";
+        lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));//20 vs 21
+    }
+
+    @Test //Test case 12
+    public void IfOneBustOtherWins(){
+        GameMain gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+        gameMain.setBalance(100);
+        gameMain.setBet(1);
+
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 5));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 7));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 7));
+
+        gameMain.decideWinner();
+
+        String expected = "# YOU WON  #";
+        String[] lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));//15 vs 24
+
+        outContent.reset();
+
+        gameMain.getDealer().emptyHand();
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 7));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 7));
+
+        gameMain.decideWinner();
+
+        expected = "# YOU LOST #";
+        lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));//22 vs 17
+    }
+
+    @Test //Test case 13
+    public void WinnerIsPush(){
+        GameMain gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+        gameMain.setBalance(100);
+        gameMain.setBet(1);
+
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 7));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 7));
+
+        gameMain.decideWinner();
+
+        String expected = "#   PUSH   #";
+        String[] lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));//17 vs 17
+
+        outContent.reset();
+
+        gameMain.getDealer().emptyHand();
+        gameMain.getYou().emptyHand();
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 1));
+        gameMain.getYou().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 10));
+        gameMain.getDealer().addCardToPlayersHand(new Cards(Suits.Clubs, 1));
+
+        gameMain.decideWinner();
+
+        expected = "#   PUSH   #";
+        lines = outContent.toString().split("\n");
+        lines = Arrays.stream(lines)
+                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                .map(c -> c.replaceAll("\t",""))
+                .map(c -> c.replaceAll("\r",""))
+                .map(c -> c.replaceAll("\n",""))
+                .toArray(String[]::new);
+        Assert.assertTrue(Arrays.asList(lines).contains(expected));//21 vs 21
+    }
+
+    @Test //Test case 14
+    public void DoubleDownOnlyDraws1Card(){
+        GameMain gameMain = new GameMain();
+        gameMain.setPlayerName("Test");
+
+        Assert.assertEquals(gameMain.getYou().getNumCardsInHand(), 0);
+
+        gameMain.doubleDown();
+
+        Assert.assertEquals(gameMain.getYou().getNumCardsInHand(), 1);
+    }
 }

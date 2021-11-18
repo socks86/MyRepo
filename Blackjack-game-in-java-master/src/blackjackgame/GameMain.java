@@ -56,6 +56,8 @@ public class GameMain {
 	}
 
 	public Players getDealer() { return dealer;}
+
+	public void setBet(float bet) { this.bet = bet; }
 	
 	GameMain(String pName){
 		
