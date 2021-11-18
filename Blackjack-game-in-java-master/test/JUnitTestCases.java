@@ -92,47 +92,54 @@ public class JUnitTestCases {
 
     @Test //Test case 4
     public void CheckForDoubleDownOption(){
-        String userInput = "50\nDD";
-        ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(bais);
+        GameMain gameMain;
+        String[] lines;
+        String expected;
+        do {
+            String userInput = "50\nDD";
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
+            outContent.reset();
+            gameMain = new GameMain();
+            gameMain.setPlayerName("Test");
+            gameMain.setBalance(100);
 
-        GameMain gameMain = new GameMain();
-        gameMain.setPlayerName("Test");
-        gameMain.setBalance(100);
+            gameMain.dealTheGame();
 
-        gameMain.dealTheGame();
+            expected = "Hit or Stay or Double Down? [Enter H or S or DD]";
+            lines = outContent.toString().split("\n");
+            lines = Arrays.stream(lines)
+                    .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                    .map(c -> c.replaceAll("\t",""))
+                    .map(c -> c.replaceAll("\r",""))
+                    .map(c -> c.replaceAll("\n",""))
+                    .toArray(String[]::new);
+        }while(Arrays.asList(lines).contains("# HURRAY!!...BLACKJACK, YOU WON #"));
 
-        String expected = "Hit or Stay or Double Down? [Enter H or S or DD]";
-        String[] lines = outContent.toString().split("\n");
-        lines = Arrays.stream(lines)
-                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
-                .map(c -> c.replaceAll("\t",""))
-                .map(c -> c.replaceAll("\r",""))
-                .map(c -> c.replaceAll("\n",""))
-                .toArray(String[]::new);
         Assert.assertTrue(Arrays.asList(lines).contains(expected));
 
+        do{
+            String userInput = "100\nDD";
+            ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+            System.setIn(bais);
 
-        userInput = "100\nDD";
-        bais = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(bais);
+            outContent.reset();
+            gameMain = new GameMain();
+            gameMain.setPlayerName("Test");
+            gameMain.setBalance(100);
 
-        gameMain = new GameMain();
-        gameMain.setPlayerName("Test");
-        gameMain.setBalance(100);
+            gameMain.dealTheGame();
 
-        outContent.reset();
+            expected = "Hit or Stay? [Enter H or S(or press any letter to Stay)]";
+            lines = outContent.toString().split("\n");
+            lines = Arrays.stream(lines)
+                    .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
+                    .map(c -> c.replaceAll("\t",""))
+                    .map(c -> c.replaceAll("\r",""))
+                    .map(c -> c.replaceAll("\n",""))
+                    .toArray(String[]::new);
+        }while(Arrays.asList(lines).contains("# HURRAY!!...BLACKJACK, YOU WON #"));
 
-        gameMain.dealTheGame();
-
-        expected = "Hit or Stay? [Enter H or S(or press any letter to Stay)]";
-        lines = outContent.toString().split("\n");
-        lines = Arrays.stream(lines)
-                .filter(value -> value != null && !value.equals("\r") && value.length() > 0)
-                .map(c -> c.replaceAll("\t",""))
-                .map(c -> c.replaceAll("\r",""))
-                .map(c -> c.replaceAll("\n",""))
-                .toArray(String[]::new);
         Assert.assertTrue(Arrays.asList(lines).contains(expected));
     }
 
