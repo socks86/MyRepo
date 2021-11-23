@@ -5,7 +5,8 @@ public class Players {
 	private String playerName;
 	private Cards[] playerHand = new Cards[10];
 	private int numCardsInHand;
-	
+
+	public int getNumCardsInHand() { return numCardsInHand;}
 	
 	public Players(String name){
 		
